@@ -1,0 +1,25 @@
+package request;
+
+public class StateRequest {
+    private String label;
+    private boolean isFinal;
+    private boolean isInitial;
+
+    public StateRequest(String label, boolean isFinal, boolean isInitial) {
+        this.label = label;
+        this.isFinal = isFinal;
+        this.isInitial = isInitial;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public boolean isInitial() {
+        return isInitial;
+    }
+}
