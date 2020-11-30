@@ -1,7 +1,6 @@
 package service.impl;
 
 import exception.AutomatonCreationException;
-import exception.AutomatonException;
 import request.StateRequest;
 import request.TransitionRequest;
 import service.AutomatonCreationService;
@@ -26,7 +25,12 @@ public class AutomatonCreationServiceImpl implements AutomatonCreationService {
     }
 
     private void createState(StateRequest request, HashMap<String, State> states) {
-        State state = new State(request.getLabel(), request.isFinal(), request.isInitial());
+        State state;
+        if (request.isFinal()) {
+            state = new State(request.getLabel(), request.getTokenType(), request.isFinal(), request.isInitial());
+        } else {
+            state = new State(request.getLabel(), request.isFinal(), request.isInitial());
+        }
         states.put(request.getLabel(), state);
     }
 

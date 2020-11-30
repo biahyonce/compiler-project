@@ -16,7 +16,7 @@ public class AutomatonSimulationServiceImpl implements AutomatonSimulationServic
             else { break; }
         }
         // TODO: Improve the follow final result
-        if (automaton.isAtFinalState()) { System.out.println("Accepted"); }
+        if (automaton.isAtFinalState()) { System.out.println("Accepted -> " + automaton.getCurrentState().getTokenType()); }
         else { System.out.println("Denied"); }
     }
 }

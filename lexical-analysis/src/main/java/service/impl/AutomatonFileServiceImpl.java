@@ -23,13 +23,23 @@ public class AutomatonFileServiceImpl implements AutomatonFileService {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] requestString = line.split(SPLIT_REGEX);
-                requests.add(new StateRequest(requestString[0], Boolean.parseBoolean(requestString[1]), Boolean.parseBoolean(requestString[2])));
+                StateRequest request = createStateRequest(requestString);
+                requests.add(request);
             }
             scanner.close();
             inputStream.close();
             return requests;
         } catch (Exception e) {
             throw new AutomatonFileException("Error on reading states file", e);
+        }
+    }
+
+    private StateRequest createStateRequest(String[] requestString) {
+        int size = requestString.length;
+        if (size == 3) {
+            return new StateRequest(requestString[0], Boolean.parseBoolean(requestString[1]), Boolean.parseBoolean(requestString[2]));
+        } else {
+            return new StateRequest(requestString[0], requestString[3], Boolean.parseBoolean(requestString[1]), Boolean.parseBoolean(requestString[2]));
         }
     }
 

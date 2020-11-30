@@ -22,6 +22,10 @@ public class Automaton {
         logger.info("Created automaton");
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
     public boolean hasNextState(String symbol) {
         return currentState.getTransitions().containsKey(symbol);
     }

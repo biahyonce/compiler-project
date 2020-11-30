@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class State {
     private static final Logger logger = LoggerFactory.getLogger(State.class);
     private String label;
+    private String tokenType;
     private boolean isFinal;
     private boolean isInitial;
     private HashMap<String, State> transitions;
@@ -17,7 +18,16 @@ public class State {
         this.isFinal = isFinal;
         this.isInitial = isInitial;
         this.transitions = new HashMap<>();
-        logger.info("Created state labeled {}", label);
+        logger.info("Created non final state labeled {}", label);
+    }
+
+    public State(String label, String tokenType, boolean isFinal, boolean isInitial) {
+        this.label = label;
+        this.tokenType = tokenType;
+        this.isFinal = isFinal;
+        this.isInitial = isInitial;
+        this.transitions = new HashMap<>();
+        logger.info("Created final state labeled {}", label);
     }
 
     public void addTransition(String symbol, State state) {
@@ -32,6 +42,10 @@ public class State {
         }
     }
 
+    public String getTokenType() {
+        return tokenType;
+    }
+
     public String getLabel() {
         return label;
     }
@@ -42,6 +56,10 @@ public class State {
 
     public boolean isInitial() {
         return isInitial;
+    }
+
+    public State(String tokenType) {
+        this.tokenType = tokenType;
     }
 
     public HashMap<String, State> getTransitions() {

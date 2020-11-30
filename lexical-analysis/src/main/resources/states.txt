@@ -1,5 +1,5 @@
 A false true
-B true false
-C true false
-D true false
-E true false
+B true false OPERADOR
+C true false OPERADOR
+D true false OPERADOR
+E true false OPERADOR
