@@ -3,6 +3,8 @@ package service.impl;
 import service.AutomatonCreationService;
 import service.AutomatonSimulationService;
 import structure.Automaton;
+import buffer.impl.BufferImpl;
+import exception.BufferException;
 
 public class AutomatonSimulationServiceImpl implements AutomatonSimulationService {
     AutomatonCreationService automatonCreationService = new AutomatonCreationServiceImpl();
@@ -10,13 +12,18 @@ public class AutomatonSimulationServiceImpl implements AutomatonSimulationServic
     @Override
     public void simulate(String s) {
         Automaton automaton = automatonCreationService.create();
-        for(char c : s.toCharArray()) {
-            String symbol = String.valueOf(c);
-            if (automaton.hasNextState(symbol)) { automaton.makeTransition(symbol); }
-            else { break; }
+        BufferImpl buffer = new BufferImpl(automaton, s);
+
+        try {
+        while(buffer.hasToken()) {
+        	System.out.println("Accepted token: " + buffer.getNextToken());
         }
-        // TODO: Improve the follow final result
-        if (automaton.isAtFinalState()) { System.out.println("Accepted -> " + automaton.getCurrentState().getTokenType()); }
-        else { System.out.println("Denied"); }
+        }catch(BufferException e) {
+        	System.out.println(e.getMessage());
+        	System.out.println("Compilation ended with errors.");
+        	return;
+        }
+        
+        System.out.println("Compilation completed without errors!");
     }
 }

@@ -37,4 +37,8 @@ public class Automaton {
     public void makeTransition(String symbol) {
         this.currentState = currentState.getTransitions().get(symbol);
     }
+    
+    public void reset() {
+    	this.currentState = this.initialState;
+    }
 }
