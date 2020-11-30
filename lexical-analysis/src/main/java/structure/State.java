@@ -18,7 +18,7 @@ public class State {
         this.isFinal = isFinal;
         this.isInitial = isInitial;
         this.transitions = new HashMap<>();
-        logger.info("Created state labeled {}", label);
+        logger.info("Created non final state labeled {}", label);
     }
 
     public State(String label, String tokenType, boolean isFinal, boolean isInitial) {
@@ -27,7 +27,7 @@ public class State {
         this.isFinal = isFinal;
         this.isInitial = isInitial;
         this.transitions = new HashMap<>();
-        logger.info("Created state labeled {}", label);
+        logger.info("Created final state labeled {}", label);
     }
 
     public void addTransition(String symbol, State state) {
@@ -40,6 +40,10 @@ public class State {
             State state = this.transitions.remove(symbol);
             logger.info("Removed transition from symbol {} to state labeled {}", symbol, state.label);
         }
+    }
+
+    public String getTokenType() {
+        return tokenType;
     }
 
     public String getLabel() {
