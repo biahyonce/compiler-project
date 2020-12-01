@@ -12,6 +12,7 @@ public class LexicalAnalysis {
         while(scanner.hasNextLine()) {
             fileStr += scanner.nextLine();
         }
+        scanner.close();
         return fileStr;
     }
 
