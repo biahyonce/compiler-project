@@ -50,8 +50,14 @@ public class AutomatonFileServiceImpl implements AutomatonFileService {
             Scanner scanner = new Scanner(inputStream);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] requestString = line.split(SPLIT_REGEX);
-                requests.add(new TransitionRequest(requestString[0], requestString[1], requestString[2]));
+                ArrayList<String> requestString = this.getRequestString(line);
+                requests.add(
+                    new TransitionRequest(
+                        requestString.get(0), 
+                        requestString.get(1), 
+                        requestString.get(2)
+                    )
+                );
             }
             scanner.close();
             inputStream.close();
@@ -59,5 +65,17 @@ public class AutomatonFileServiceImpl implements AutomatonFileService {
         } catch (Exception e) {
             throw new AutomatonFileException("Error on reading transitions file", e);
         }
+    }
+
+    private ArrayList<String> getRequestString(String line) {
+        ArrayList<String> requestString = new ArrayList<String>();
+        String[] arr = line.split(SPLIT_REGEX);
+        for(int i=0; i<arr.length; i++) {
+            requestString.add(arr[i]);
+        }
+        while(requestString.size() < 3) {
+            requestString.add(" ");
+        }
+        return requestString;
     }
 }

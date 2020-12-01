@@ -36,6 +36,7 @@ public class BufferImpl implements BufferInterface {
 			
 			this.startLexem = this.endLexem;
 			this.automaton.reset();
+			this.adjustForBlankCharacters();
 			return resultToken;
 		}
 		
@@ -62,6 +63,17 @@ public class BufferImpl implements BufferInterface {
 			this.rowCounter ++;
 			this.colCounter = 1;
 		}
+	}
+
+	private void adjustForBlankCharacters() {
+		while(this.startLexem == this.endLexem 
+			&& this.isBlankCharacter(this.lookAhead().charAt(0))) {
+			this.startLexem++;
+			this.endLexem++;
+		}
+	}
+	private boolean isBlankCharacter(char c) {
+		return c == ' ' || c == '\n';
 	}
 	
 	private void throwException() {
