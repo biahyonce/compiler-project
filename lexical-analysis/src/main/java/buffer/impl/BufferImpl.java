@@ -9,6 +9,7 @@ public class BufferImpl implements BufferInterface {
 	private String text;
 	private int startLexem = 0, endLexem = 0;
 	private int rowCounter = 1, colCounter = 1;
+	private SymbolTable symbolTable = new SymbolTable();
 	
 	public BufferImpl(Automaton automaton, String text) {
 		this.automaton = automaton;
@@ -29,9 +30,17 @@ public class BufferImpl implements BufferInterface {
 		}
 		
 		if(this.automaton.isAtFinalState()) {
+			
+			Integer index = null;
+			if(this.automaton.getCurrentState().getTokenType().equalsIgnoreCase("id")) {
+				index = symbolTable.getIndex(this.text.substring(this.startLexem, this.endLexem));
+			}
+			
+			System.out.println("Tabela: " + symbolTable.getTable().toString() + "\n");
+			
 			Token resultToken = new Token(
 					this.automaton.getCurrentState().getTokenType(),
-					this.text.substring(this.startLexem, this.endLexem)
+					index == null ? this.text.substring(this.startLexem, this.endLexem) : index.toString()
 			);
 			
 			this.startLexem = this.endLexem;
