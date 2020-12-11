@@ -1,5 +1,6 @@
 package com.github.biancacristina.syntax.analysis.structure;
 
+import com.github.biancacristina.lexical.analysis.structure.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,18 +19,7 @@ public class Procedure {
         this.startVertices = new HashMap<>();
     }
 
-    public void process(Stack<Token> stack, SyntacticGraph syntacticGraph) {
-        // TODO: Handle (*) -> closure
-        String peekToken = stack.peek().getValue();
-        Vertex currentVertex = startVertices.get(peekToken);
-        while (currentVertex != null) {
-            currentVertex.process(stack, syntacticGraph);
-            currentVertex = currentVertex.getNextVertex();
-        }
-
-        if (stack.isEmpty()) { logger.info("Token accepted!"); }
-        else { logger.error("Token not accepted!"); }
-    }
+    public void process(Stack<Token> stack, SyntacticGraph syntacticGraph) {}
 
     public void addStartVertex(Vertex vertex) {
         this.startVertices.put(vertex.getLabel(), vertex);

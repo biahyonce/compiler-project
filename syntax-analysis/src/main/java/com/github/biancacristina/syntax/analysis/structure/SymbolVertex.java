@@ -1,9 +1,8 @@
 package com.github.biancacristina.syntax.analysis.structure;
 
+import com.github.biancacristina.lexical.analysis.structure.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Stack;
 
 public class SymbolVertex extends Vertex {
     private static final Logger logger = LoggerFactory.getLogger(SymbolVertex.class);
@@ -12,11 +11,10 @@ public class SymbolVertex extends Vertex {
     }
 
     @Override
-    public void process(Stack<Token> stack, SyntacticGraph syntacticGraph) {
-        String token = stack.pop().getValue();
-        if (!tokenMatch(token)) { logger.error("Token " + token + "was not accepted"); }
-        logger.info("Processed token " + token);
+    public void process(Token token, SyntacticGraph syntacticGraph) {
+
     }
+
 
     private boolean tokenMatch(String token) {
         return token.equals(this.getLabel());

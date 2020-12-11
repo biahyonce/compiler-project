@@ -1,6 +1,6 @@
 package com.github.biancacristina.syntax.analysis.structure;
 
-import java.util.Stack;
+import com.github.biancacristina.lexical.analysis.structure.Token;
 
 public abstract class Vertex {
     private String label;
@@ -10,7 +10,7 @@ public abstract class Vertex {
         this.label = label;
     }
 
-    public abstract void process(Stack<Token> stack, SyntacticGraph syntacticGraph);
+    public abstract void process(Token token, SyntacticGraph syntacticGraph);
 
     public boolean hasNextVertex() {
         return this.nextVertex != null;

@@ -16,6 +16,7 @@ public class AutomatonSimulationServiceImpl implements AutomatonSimulationServic
 
         try {
         while(buffer.hasToken()) {
+            // TODO: Start syntactic here
         	System.out.println("Accepted token: " + buffer.getNextToken());
         }
         }catch(BufferException e) {
