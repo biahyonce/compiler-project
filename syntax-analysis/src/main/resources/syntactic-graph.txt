@@ -1,5 +1,5 @@
-A x
-A (B)
-B AC
-C +AC
-C #
+S aAd
+A cA
+A eB
+B f
+B g

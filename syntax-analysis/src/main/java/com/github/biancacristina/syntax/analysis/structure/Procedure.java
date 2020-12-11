@@ -4,9 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Procedure {
-    // TODO: Include value of stack here ?
     private static final Logger logger = LoggerFactory.getLogger(Procedure.class);
     private String label;
     private HashMap<String, Vertex> startVertices;
@@ -16,6 +16,19 @@ public class Procedure {
         this.label = label;
         this.vertices = new HashMap<>();
         this.startVertices = new HashMap<>();
+    }
+
+    public void process(Stack<Token> stack, SyntacticGraph syntacticGraph) {
+        // TODO: Handle (*) -> closure
+        String peekToken = stack.peek().getValue();
+        Vertex currentVertex = startVertices.get(peekToken);
+        while (currentVertex != null) {
+            currentVertex.process(stack, syntacticGraph);
+            currentVertex = currentVertex.getNextVertex();
+        }
+
+        if (stack.isEmpty()) { logger.info("Token accepted!"); }
+        else { logger.error("Token not accepted!"); }
     }
 
     public void addStartVertex(Vertex vertex) {

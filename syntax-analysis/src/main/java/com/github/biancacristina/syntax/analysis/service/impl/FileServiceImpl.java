@@ -4,7 +4,6 @@ import com.github.biancacristina.syntax.analysis.exception.FileException;
 import com.github.biancacristina.syntax.analysis.request.VertexRequest;
 import com.github.biancacristina.syntax.analysis.service.FileService;
 import com.github.biancacristina.syntax.analysis.structure.Procedure;
-import com.github.biancacristina.syntax.analysis.structure.Rule;
 import com.github.biancacristina.syntax.analysis.structure.SyntacticGraph;
 import com.github.biancacristina.syntax.analysis.structure.Vertex;
 import org.slf4j.Logger;
@@ -30,8 +29,7 @@ public class FileServiceImpl implements FileService {
                 logger.info("Read line: " + requestString[0] + " " + requestString[1]);
                 addProcedure(requestString, procedures);
             }
-            Rule rule = new Rule(procedures);
-            return new SyntacticGraph(rule);
+            return new SyntacticGraph(procedures);
         } catch (Exception e) {
             throw new FileException("Error on reading syntactic graph file", e);
         }
