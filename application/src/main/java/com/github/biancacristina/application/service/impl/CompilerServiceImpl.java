@@ -25,7 +25,7 @@ public class CompilerServiceImpl implements CompilerService {
         this.syntacticGraph = fileService.readSyntacticGraph();
     }
 
-    @Override   
+    @Override
     public String read(String fileName) {
         InputStream inputStream  = CompilerServiceImpl.class.getResourceAsStream(fileName);
         Scanner scanner = new Scanner(inputStream);
