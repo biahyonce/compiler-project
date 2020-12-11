@@ -1,0 +1,5 @@
+A x
+A (B)
+B AC
+C +AC
+C #
