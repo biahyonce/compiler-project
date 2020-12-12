@@ -20,18 +20,7 @@ To run this project, execute the following commands:
 
 ```
 mvn clean install
-java -jar lexical-analysis/target/lexical-analysis-1.0-SNAPSHOT-jar-with-dependencies.jar (path of input file)
-```
-
-Where the path of input file is the path of the file with the code to be compiled. Such a file can be structured as:
-
-```
-int main() {
-    int a;
-    while(a<>b) {
-        printf("Hello World!");
-    }
-}
+mvn compile exec:java
 ```
 
 ### IDE
