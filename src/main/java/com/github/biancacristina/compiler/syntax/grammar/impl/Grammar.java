@@ -17,10 +17,18 @@ public class Grammar implements GrammarInterface {
         // TODO add factories to create terminal and non-terminal objects
     }
 
+    @Override
+    public boolean hasItem(String label) {
+        return this.rules.containsKey(label);
+    }
+
+    @Override
     public ItemInterface get(String label) {
-        if(!this.rules.containsKey(label)) {
-            this.createRule(label);
-        }
         return this.rules.get(label);
+    }
+
+    @Override
+    public void put(ItemInterface item) {
+        this.rules.put(item.getLabel(), item);
     }
 }
