@@ -12,7 +12,7 @@ public class Production implements ItemInterface {
 
     public Production(String label) {
         this.label = label;
-        this.orRules = new ArrayList<Sentence>();
+        this.orRules = new ArrayList<>();
     }
 
     @Override
@@ -38,6 +38,14 @@ public class Production implements ItemInterface {
             return;
         }
         this.error();
+    }
+
+    public void addSentence(Sentence sentence) {
+        this.orRules.add(sentence);
+    }
+
+    public ArrayList<Sentence> getOrRules() {
+        return orRules;
     }
 
     public void error() throws SyntaxException{
