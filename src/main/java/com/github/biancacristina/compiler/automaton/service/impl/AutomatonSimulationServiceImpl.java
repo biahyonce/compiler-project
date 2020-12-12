@@ -12,11 +12,12 @@ public class AutomatonSimulationServiceImpl implements AutomatonSimulationServic
     @Override
     public void simulate(String s) {
         Automaton automaton = automatonCreationService.create();
-        LexerImpl buffer = new LexerImpl(automaton, s);
+        LexerImpl lexer = LexerImpl.getInstance();
+        lexer.build(automaton, s);
 
         try {
-        while(buffer.hasToken()) {
-        	System.out.println("Accepted token: " + buffer.getNextToken());
+        while(lexer.hasToken()) {
+        	System.out.println("Accepted token: " + lexer.getNextToken());
         }
         }catch(LexerException e) {
         	System.out.println(e.getMessage());
