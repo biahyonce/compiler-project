@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.structure;
+package com.github.biancacristina.compiler.common;
 
 import java.util.HashMap;
 

@@ -1,19 +1,19 @@
-package com.github.biancacristina.compiler.lexical.buffer.impl;
+package com.github.biancacristina.compiler.lexical.impl;
 
-import com.github.biancacristina.compiler.lexical.buffer.Buffer;
-import com.github.biancacristina.compiler.lexical.exception.BufferException;
-import com.github.biancacristina.compiler.lexical.structure.Automaton;
-import com.github.biancacristina.compiler.lexical.structure.SymbolTable;
-import com.github.biancacristina.compiler.lexical.structure.Token;
+import com.github.biancacristina.compiler.lexical.Lexer;
+import com.github.biancacristina.compiler.lexical.exception.LexerException;
+import com.github.biancacristina.compiler.automaton.Automaton;
+import com.github.biancacristina.compiler.common.SymbolTable;
+import com.github.biancacristina.compiler.common.Token;
 
-public class BufferImpl implements Buffer {
+public class LexerImpl implements Lexer {
 	private Automaton automaton;
 	private String text;
 	private int startLexem = 0, endLexem = 0;
 	private int rowCounter = 1, colCounter = 1;
 	private SymbolTable symbolTable = new SymbolTable();
 	
-	public BufferImpl(Automaton automaton, String text) {
+	public LexerImpl(Automaton automaton, String text) {
 		this.automaton = automaton;
 		this.text = text;
 	}
@@ -88,6 +88,6 @@ public class BufferImpl implements Buffer {
 	}
 
 	private void throwException() {
-		throw new BufferException("ERROR at row " + this.rowCounter + " column " + this.colCounter);
+		throw new LexerException("ERROR at row " + this.rowCounter + " column " + this.colCounter);
 	}
 }

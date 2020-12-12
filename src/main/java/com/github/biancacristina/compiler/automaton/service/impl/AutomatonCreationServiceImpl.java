@@ -1,12 +1,12 @@
-package com.github.biancacristina.compiler.lexical.service.impl;
+package com.github.biancacristina.compiler.automaton.service.impl;
 
-import com.github.biancacristina.compiler.lexical.exception.AutomatonCreationException;
-import com.github.biancacristina.compiler.lexical.request.StateRequest;
-import com.github.biancacristina.compiler.lexical.request.TransitionRequest;
-import com.github.biancacristina.compiler.lexical.service.AutomatonCreationService;
-import com.github.biancacristina.compiler.lexical.service.AutomatonFileService;
-import com.github.biancacristina.compiler.lexical.structure.Automaton;
-import com.github.biancacristina.compiler.lexical.structure.State;
+import com.github.biancacristina.compiler.automaton.exception.AutomatonCreationException;
+import com.github.biancacristina.compiler.automaton.request.StateRequest;
+import com.github.biancacristina.compiler.automaton.request.TransitionRequest;
+import com.github.biancacristina.compiler.automaton.service.AutomatonCreationService;
+import com.github.biancacristina.compiler.automaton.service.AutomatonFileService;
+import com.github.biancacristina.compiler.automaton.Automaton;
+import com.github.biancacristina.compiler.automaton.State;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.github.biancacristina.compiler.lexical.structure;
+package com.github.biancacristina.compiler.automaton;
 
-import com.github.biancacristina.compiler.lexical.exception.AutomatonException;
+import com.github.biancacristina.compiler.automaton.exception.AutomatonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

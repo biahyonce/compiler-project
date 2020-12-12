@@ -1,9 +1,9 @@
-package com.github.biancacristina.compiler.lexical.service.impl;
+package com.github.biancacristina.compiler.automaton.service.impl;
 
-import com.github.biancacristina.compiler.lexical.exception.AutomatonFileException;
-import com.github.biancacristina.compiler.lexical.request.StateRequest;
-import com.github.biancacristina.compiler.lexical.request.TransitionRequest;
-import com.github.biancacristina.compiler.lexical.service.AutomatonFileService;
+import com.github.biancacristina.compiler.automaton.exception.AutomatonFileException;
+import com.github.biancacristina.compiler.automaton.request.StateRequest;
+import com.github.biancacristina.compiler.automaton.request.TransitionRequest;
+import com.github.biancacristina.compiler.automaton.service.AutomatonFileService;
 
 import java.io.InputStream;
 import java.util.ArrayList;

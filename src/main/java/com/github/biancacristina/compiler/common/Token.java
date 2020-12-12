@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.structure;
+package com.github.biancacristina.compiler.common;
 
 public class Token {
 	private String label, attribute;

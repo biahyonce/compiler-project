@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.structure;
+package com.github.biancacristina.compiler.automaton;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

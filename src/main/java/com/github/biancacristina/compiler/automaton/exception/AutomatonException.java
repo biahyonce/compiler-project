@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.exception;
+package com.github.biancacristina.compiler.automaton.exception;
 
 public class AutomatonException extends RuntimeException {
     public AutomatonException(String message) {

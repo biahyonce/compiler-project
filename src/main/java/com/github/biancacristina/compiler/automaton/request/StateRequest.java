@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.request;
+package com.github.biancacristina.compiler.automaton.request;
 
 public class StateRequest {
     private String label;

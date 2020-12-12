@@ -1,10 +1,10 @@
-package com.github.biancacristina.compiler.lexical.service.impl;
+package com.github.biancacristina.compiler.automaton.service.impl;
 
-import com.github.biancacristina.compiler.lexical.buffer.impl.BufferImpl;
-import com.github.biancacristina.compiler.lexical.exception.BufferException;
-import com.github.biancacristina.compiler.lexical.service.AutomatonCreationService;
-import com.github.biancacristina.compiler.lexical.service.AutomatonSimulationService;
-import com.github.biancacristina.compiler.lexical.structure.Automaton;
+import com.github.biancacristina.compiler.lexical.impl.LexerImpl;
+import com.github.biancacristina.compiler.lexical.exception.LexerException;
+import com.github.biancacristina.compiler.automaton.service.AutomatonCreationService;
+import com.github.biancacristina.compiler.automaton.service.AutomatonSimulationService;
+import com.github.biancacristina.compiler.automaton.Automaton;
 
 public class AutomatonSimulationServiceImpl implements AutomatonSimulationService {
     AutomatonCreationService automatonCreationService = new AutomatonCreationServiceImpl();
@@ -12,13 +12,13 @@ public class AutomatonSimulationServiceImpl implements AutomatonSimulationServic
     @Override
     public void simulate(String s) {
         Automaton automaton = automatonCreationService.create();
-        BufferImpl buffer = new BufferImpl(automaton, s);
+        LexerImpl buffer = new LexerImpl(automaton, s);
 
         try {
         while(buffer.hasToken()) {
         	System.out.println("Accepted token: " + buffer.getNextToken());
         }
-        }catch(BufferException e) {
+        }catch(LexerException e) {
         	System.out.println(e.getMessage());
         	System.out.println("Compilation ended with errors.");
         	return;

@@ -1,4 +1,4 @@
-package com.github.biancacristina.compiler.lexical.service;
+package com.github.biancacristina.compiler.automaton.service;
 
 public interface AutomatonSimulationService {
     void simulate(String s);
