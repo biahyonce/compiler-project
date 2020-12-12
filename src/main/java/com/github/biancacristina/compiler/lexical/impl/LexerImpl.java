@@ -14,6 +14,7 @@ public class LexerImpl implements Lexer {
 	private int startLexem = 0, endLexem = 0;
 	private int rowCounter = 1, colCounter = 1;
 	private SymbolTable symbolTable = new SymbolTable();
+	private Token endOfFileToken = new Token("eof", "");
 	
 	private LexerImpl(){}
 
@@ -35,6 +36,9 @@ public class LexerImpl implements Lexer {
 	}
 	
 	public Token getNextToken() {
+		if(this.finishedString()) {
+			return this.endOfFileToken;
+		}
 		while(this.automaton.hasNextState(this.lookAhead())) {
 			String charStr = this.lookAhead();
 			
@@ -46,7 +50,7 @@ public class LexerImpl implements Lexer {
 		if(this.automaton.isAtFinalState()) {
 			
 			Integer index = null;
-			if(this.automaton.getCurrentState().getTokenType().equalsIgnoreCase("id")) {
+			if(this.automaton.getCurrentState().getTokenType().equals("id")) {
 				index = symbolTable.getIndex(this.text.substring(this.startLexem, this.endLexem));
 			}
 			

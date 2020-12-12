@@ -1,16 +1,16 @@
 package com.github.biancacristina.compiler.syntax.grammar.impl;
 
-import com.github.biancacristina.compiler.lexical.Lexer;
+import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemType;
 
 public class Terminal implements ItemInterface {
     private String label;
-    private Lexer lexer;
+    private ParserInterface parser;
 
-    public Terminal(String label, Lexer lexer) {
+    public Terminal(String label, ParserInterface parser) {
         this.label = label;
-        this.lexer = lexer;
+        this.parser = parser;
     }
 
     @Override
@@ -25,6 +25,11 @@ public class Terminal implements ItemInterface {
 
     @Override
     public void process() {
-        // TODO: eat current token with label this.label
+        System.out.println("PROCESSING TERMINAL < " + this.label + " > ------------------------");
+        this.parser.eatToken(this.label);
+    }
+
+    public void setParser(ParserInterface parser) {
+        this.parser = parser;
     }
 }

@@ -23,16 +23,15 @@ public class GrammarBuilder {
     }
 
     private void buildRule(GrammarInterface grammar, String productionLabel, List<String> sentenceString) {
-        Sentence sentence = buildSentence(grammar, sentenceString);
         Production production;
         if (grammar.hasItem(productionLabel)) {
             production = (Production) grammar.get(productionLabel);
-            production.addSentence(sentence);
         } else {
             production = new Production(productionLabel);
-            production.addSentence(sentence);
             grammar.put(production);
         }
+        Sentence sentence = buildSentence(grammar, sentenceString);
+        production.addSentence(sentence);
     }
 
     private Sentence buildSentence(GrammarInterface grammar, List<String> sentenceString) {

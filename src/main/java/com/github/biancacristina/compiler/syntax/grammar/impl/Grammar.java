@@ -1,5 +1,6 @@
 package com.github.biancacristina.compiler.syntax.grammar.impl;
 
+import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.GrammarInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 
@@ -7,14 +8,18 @@ import java.util.HashMap;
 
 public class Grammar implements GrammarInterface {
     private HashMap<String, ItemInterface> rules;
+    private ParserInterface parser;
+    private ItemInterface firstRule;
 
     public Grammar() {
         this.rules = new HashMap<String, ItemInterface>();
-        // TODO: make grammar receive an ItemFactory to create terminal and non-terminal items
     }
 
-    private void createRule(String label) {
-        // TODO add factories to create terminal and non-terminal objects
+    public void setParser(ParserInterface parser) {
+        this.parser = parser;
+        for (ItemInterface item: this.rules.values()) {
+            item.setParser(this.parser);
+        }
     }
 
     @Override
@@ -29,6 +34,15 @@ public class Grammar implements GrammarInterface {
 
     @Override
     public void put(ItemInterface item) {
+        if(this.rules.isEmpty()) {
+            this.firstRule = item;
+        }
         this.rules.put(item.getLabel(), item);
+        System.out.println("Put item < " + item.getLabel() + " > on grammar");
+    }
+
+    @Override
+    public ItemInterface getFirstRule() {
+        return this.firstRule;
     }
 }

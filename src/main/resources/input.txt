@@ -1,6 +1,1 @@
-int main() {
-    int a;
-    while(a<>b) {
-        printf("oi");
-    }
-}
+b+a

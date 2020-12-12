@@ -1,5 +1,2 @@
-S a A d
-A c A
-A e B
-B f
-B g
+S id F eof
+F signal id

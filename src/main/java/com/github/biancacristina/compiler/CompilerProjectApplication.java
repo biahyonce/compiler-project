@@ -1,6 +1,13 @@
 package com.github.biancacristina.compiler;
 
-import com.github.biancacristina.compiler.automaton.service.impl.AutomatonSimulationServiceImpl;
+import com.github.biancacristina.compiler.automaton.Automaton;
+import com.github.biancacristina.compiler.automaton.service.impl.AutomatonCreationServiceImpl;
+import com.github.biancacristina.compiler.lexical.impl.LexerImpl;
+import com.github.biancacristina.compiler.syntax.ParserInterface;
+import com.github.biancacristina.compiler.syntax.grammar.GrammarInterface;
+import com.github.biancacristina.compiler.syntax.grammar.builder.GrammarBuilder;
+import com.github.biancacristina.compiler.syntax.grammar.parser.impl.GrammarParserImpl;
+import com.github.biancacristina.compiler.syntax.impl.Parser;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -19,9 +26,14 @@ public class CompilerProjectApplication {
     }
 
     public static void main(String[] args) {
-        AutomatonSimulationServiceImpl simulator = new AutomatonSimulationServiceImpl();
-
         String s = CompilerProjectApplication.readFile("/input.txt");
-        simulator.simulate(s);
+
+        Automaton automaton = (new AutomatonCreationServiceImpl()).create();
+        LexerImpl lexer = LexerImpl.getInstance();
+        lexer.build(automaton, s);
+
+        GrammarInterface grammar = GrammarBuilder.getInstance().build(new GrammarParserImpl().read());
+        ParserInterface parser = new Parser(lexer, grammar);
+        parser.parse();
     }
 }

@@ -16,6 +16,8 @@ public class Sentence {
     }
 
     public void processAll() {
+        System.out.println("PROCESS SENTENCE: ");
+        this.concatenation.forEach(item -> System.out.println("<" + item.getLabel() + ">"));
         for(ItemInterface item: this.concatenation) {
             item.process();
         }
@@ -26,9 +28,10 @@ public class Sentence {
     }
 
     // TODO
-    public boolean canProcess(String labelFirst) {
+    public boolean canProcess(String label) {
         // return true if the given label if accepted by this sequence
         // basically checks if the first item of the concatenation accepts this label
+        System.out.println("SENTENCE Check if it can process token with label <" + label + ">");
         return true;
     }
 }
