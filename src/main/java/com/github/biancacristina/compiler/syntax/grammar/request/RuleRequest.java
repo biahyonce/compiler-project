@@ -1,19 +1,23 @@
 package com.github.biancacristina.compiler.syntax.grammar.request;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class RuleRequest {
     private String production;
-    private String sentences;
+    private List<String> sentences;
 
-    public RuleRequest(String production, String sentences) {
-        this.production = production;
-        this.sentences = sentences;
+    public RuleRequest(String[] rule) {
+        List<String> ruleList = Arrays.asList(rule);
+        this.production = ruleList.get(0);
+        this.sentences = ruleList.subList(1, ruleList.size());
     }
 
     public String getProduction() {
         return production;
     }
 
-    public String getSentences() {
+    public List<String> getSentences() {
         return sentences;
     }
 }

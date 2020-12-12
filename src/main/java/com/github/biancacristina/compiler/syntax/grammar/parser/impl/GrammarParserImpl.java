@@ -21,7 +21,7 @@ public class GrammarParserImpl implements GrammarParser {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] rule = line.split(SPLIT_REGEX);
-                rules.add(new RuleRequest(rule[0], rule[1]));
+                rules.add(new RuleRequest(rule));
             }
             return rules;
         } catch (Exception e) {

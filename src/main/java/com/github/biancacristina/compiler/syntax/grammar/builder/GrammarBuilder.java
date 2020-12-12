@@ -9,6 +9,7 @@ import com.github.biancacristina.compiler.syntax.grammar.request.ItemRequest;
 import com.github.biancacristina.compiler.syntax.grammar.request.RuleRequest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GrammarBuilder {
     private static GrammarBuilder instance;
@@ -21,7 +22,7 @@ public class GrammarBuilder {
         return grammar;
     }
 
-    private void buildRule(GrammarInterface grammar, String productionLabel, String sentenceString) {
+    private void buildRule(GrammarInterface grammar, String productionLabel, List<String> sentenceString) {
         Sentence sentence = buildSentence(grammar, sentenceString);
         Production production;
         if (grammar.hasItem(productionLabel)) {
@@ -34,10 +35,9 @@ public class GrammarBuilder {
         }
     }
 
-    private Sentence buildSentence(GrammarInterface grammar, String sentenceString) {
+    private Sentence buildSentence(GrammarInterface grammar, List<String> sentenceString) {
         Sentence sentence = new Sentence();
-        for(int i=0;i<sentenceString.length();i++) {
-            String label = String.valueOf(sentenceString.charAt(i));
+        for (String label : sentenceString) {
             ItemInterface item;
             if (grammar.hasItem(label)) {
                 item = grammar.get(label);
