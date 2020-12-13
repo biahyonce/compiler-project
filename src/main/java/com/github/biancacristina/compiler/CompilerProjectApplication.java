@@ -6,10 +6,15 @@ import com.github.biancacristina.compiler.lexical.impl.LexerImpl;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.GrammarInterface;
 import com.github.biancacristina.compiler.syntax.grammar.builder.GrammarBuilder;
+import com.github.biancacristina.compiler.syntax.grammar.parser.GrammarParser;
 import com.github.biancacristina.compiler.syntax.grammar.parser.impl.GrammarParserImpl;
+import com.github.biancacristina.compiler.syntax.grammar.request.FirstRequest;
+import com.github.biancacristina.compiler.syntax.grammar.request.FollowRequest;
+import com.github.biancacristina.compiler.syntax.grammar.request.RuleRequest;
 import com.github.biancacristina.compiler.syntax.impl.Parser;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CompilerProjectApplication {
@@ -32,7 +37,12 @@ public class CompilerProjectApplication {
         LexerImpl lexer = LexerImpl.getInstance();
         lexer.build(automaton, s);
 
-        GrammarInterface grammar = GrammarBuilder.getInstance().build(new GrammarParserImpl().read());
+        GrammarParser grammarParser = new GrammarParserImpl();
+        ArrayList<RuleRequest> rules = grammarParser.readRules();
+        ArrayList<FirstRequest> firstList = grammarParser.readFirst();
+        ArrayList<FollowRequest> followList = grammarParser.readFollow();
+
+        GrammarInterface grammar = GrammarBuilder.getInstance().build(rules, firstList, followList);
         ParserInterface parser = new Parser(lexer, grammar);
         parser.parse();
     }
