@@ -7,4 +7,5 @@ public interface ItemInterface {
     ItemType getType();
     String getLabel();
     void process();
+    boolean canProcess(String label);
 }

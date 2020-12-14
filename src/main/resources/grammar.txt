@@ -1,2 +1,4 @@
-S id F eof
-F signal id
+S id S1 eof
+S1 signal id S1
+S1 relop id S1
+S1

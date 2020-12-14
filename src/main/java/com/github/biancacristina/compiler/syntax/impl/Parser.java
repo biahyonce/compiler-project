@@ -35,4 +35,13 @@ public class Parser implements ParserInterface {
     public void parse() {
         this.grammar.getFirstRule().process();
     }
+
+    public void error(String label) throws SyntaxException{
+        String errorMessage = "Syntax Error on <"
+                + label
+                + "> token, at position: "
+                + this.getCurrentToken().getErrorInfo();
+        System.out.println(errorMessage);
+        throw new SyntaxException(errorMessage);
+    }
 }

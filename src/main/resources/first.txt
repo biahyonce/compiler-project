@@ -1,2 +1,2 @@
-S test first
-F test second
+S id
+S1 signal relop eof

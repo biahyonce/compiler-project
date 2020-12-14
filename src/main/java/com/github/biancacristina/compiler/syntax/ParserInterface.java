@@ -6,4 +6,5 @@ public interface ParserInterface {
     void eatToken(String label);
     Token getCurrentToken();
     void parse();
+    void error(String label);
 }

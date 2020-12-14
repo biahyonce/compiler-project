@@ -32,4 +32,8 @@ public class Terminal implements ItemInterface {
     public void setParser(ParserInterface parser) {
         this.parser = parser;
     }
+
+    public boolean canProcess(String label) {
+        return this.label.equals(label);
+    }
 }

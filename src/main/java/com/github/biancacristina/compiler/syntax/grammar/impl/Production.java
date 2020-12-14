@@ -3,7 +3,6 @@ package com.github.biancacristina.compiler.syntax.grammar.impl;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemType;
-import com.github.biancacristina.compiler.syntax.grammar.exception.SyntaxException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,17 +31,16 @@ public class Production implements ItemInterface {
 
     @Override
     public void process() {
-        // TODO: check first: this.isTokenInFirst(nextTokenLabel)
         System.out.println("PROCESSING RULE < " + this.label + " > ------------------------");
+        String nextTokenLabel = this.parser.getCurrentToken().getLabel();
         for (Sentence sentence: this.orRules) {
-            String nextTokenLabel = this.parser.getCurrentToken().getLabel();
             if(!sentence.canProcess(nextTokenLabel)) {
                 continue;
             }
             sentence.processAll();
             return;
         }
-        this.error();
+        this.parser.error(nextTokenLabel);
     }
 
     public void addFirst(HashMap<String, Boolean> first) {
@@ -54,6 +52,7 @@ public class Production implements ItemInterface {
     }
 
     public boolean isTokenInFirst(String tokenLabel) {
+        System.out.println("CHECKING IF <" + tokenLabel + "> is in " + this.first.toString());
         return this.first.containsKey(tokenLabel);
     }
 
@@ -71,16 +70,16 @@ public class Production implements ItemInterface {
         return orRules;
     }
 
-    public void error() throws SyntaxException{
-        throw new SyntaxException("Syntax Error after <" + this.label + "> rule.");
-    }
-
     public void setParser(ParserInterface parser) {
         this.parser = parser;
         this.orRules.forEach(rule -> {
-            rule.getAll().forEach(item -> {
-                item.setParser(parser);
-            });
+            rule.setParser(parser);
         });
+    }
+
+    public boolean canProcess(String label) {
+        System.out.println("RULE <" + this.label + "> CHECK IF CAN PROCESS LABEL <" + label + ">");
+        System.out.println("RULE <" + this.label + "> FIRST: " + this.first.toString());
+        return this.isTokenInFirst(label);
     }
 }

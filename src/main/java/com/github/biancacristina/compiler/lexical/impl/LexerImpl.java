@@ -14,7 +14,7 @@ public class LexerImpl implements Lexer {
 	private int startLexem = 0, endLexem = 0;
 	private int rowCounter = 1, colCounter = 1;
 	private SymbolTable symbolTable = new SymbolTable();
-	private Token endOfFileToken = new Token("eof", "");
+	private Token endOfFileToken;
 	
 	private LexerImpl(){}
 
@@ -30,14 +30,21 @@ public class LexerImpl implements Lexer {
 		this.setAutomaton(automaton);
 		this.setText(text);
 	}
+
+	private Token getEndOfFileToken() {
+		if(this.endOfFileToken != null) {
+			return this.endOfFileToken;
+		}
+		return this.endOfFileToken = new Token("eof", "eof", this.rowCounter, this.colCounter);
+	}
 	
 	public boolean hasToken() {
 		return !this.finishedString();
 	}
-	
+
 	public Token getNextToken() {
 		if(this.finishedString()) {
-			return this.endOfFileToken;
+			return this.getEndOfFileToken();
 		}
 		while(this.automaton.hasNextState(this.lookAhead())) {
 			String charStr = this.lookAhead();
@@ -58,7 +65,9 @@ public class LexerImpl implements Lexer {
 			
 			Token resultToken = new Token(
 					this.automaton.getCurrentState().getTokenType(),
-					index == null ? this.text.substring(this.startLexem, this.endLexem) : index.toString()
+					index == null ? this.text.substring(this.startLexem, this.endLexem) : index.toString(),
+					this.rowCounter,
+					this.colCounter
 			);
 			
 			this.startLexem = this.endLexem;
@@ -104,7 +113,7 @@ public class LexerImpl implements Lexer {
 	}
 
 	private void throwException() {
-		throw new LexerException("ERROR at row " + this.rowCounter + " column " + this.colCounter);
+		throw new LexerException("LEXICAL ERROR at row " + this.rowCounter + " column " + this.colCounter);
 	}
 
 	public static LexerImpl getInstance() {
