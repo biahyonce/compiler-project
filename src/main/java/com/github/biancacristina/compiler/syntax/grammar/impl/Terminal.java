@@ -3,6 +3,8 @@ package com.github.biancacristina.compiler.syntax.grammar.impl;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemType;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeNodeInterface;
+import com.github.biancacristina.compiler.syntax.tree.impl.ParserTreeNode;
 
 public class Terminal implements ItemInterface {
     private String label;
@@ -24,9 +26,10 @@ public class Terminal implements ItemInterface {
     }
 
     @Override
-    public void process() {
-        System.out.println("PROCESSING TERMINAL < " + this.label + " > ------------------------");
+    public ParserTreeNodeInterface process() {
+        System.out.println("PROCESSING TERMINAL " + this.toString() + " ------------------------");
         this.parser.eatToken(this.label);
+        return new ParserTreeNode(this.label);
     }
 
     public void setParser(ParserInterface parser) {
@@ -34,6 +37,18 @@ public class Terminal implements ItemInterface {
     }
 
     public boolean canProcess(String label) {
-        return this.label.equals(label);
+        System.out.println("TERMINAL check if terminal <"
+                + this.label
+                + "> is compatible with token <"
+                + this.parser.getCurrentToken().getLabel()
+                + ","
+                + this.parser.getCurrentToken().getAttribute()
+                + ">"
+        );
+        return this.parser.canEatToken(this.label);
+    }
+
+    public String toString() {
+        return "<" + this.label + ">";
     }
 }

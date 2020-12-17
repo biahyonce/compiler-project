@@ -1,2 +1,2 @@
-S id
-S1 signal relop eof
+S id separator eof
+S1 id separator eof

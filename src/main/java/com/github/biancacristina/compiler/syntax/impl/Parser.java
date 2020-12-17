@@ -5,17 +5,22 @@ import com.github.biancacristina.compiler.lexical.Lexer;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.GrammarInterface;
 import com.github.biancacristina.compiler.syntax.grammar.exception.SyntaxException;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeInterface;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeNodeInterface;
+import com.github.biancacristina.compiler.syntax.tree.impl.ParserTree;
 
 public class Parser implements ParserInterface {
     private Lexer lexer;
     private GrammarInterface grammar;
     private Token currentToken;
+    private ParserTreeInterface tree;
 
     public Parser(Lexer lexer, GrammarInterface grammar) {
         this.lexer = lexer;
         this.grammar = grammar;
         this.currentToken = lexer.getNextToken();
         this.grammar.setParser(this);
+        this.tree = new ParserTree();
     }
 
     public Token getCurrentToken() {
@@ -25,15 +30,22 @@ public class Parser implements ParserInterface {
     public void eatToken(String label) {
         System.out.println("EAT TOKEN <" + label + ">");
         System.out.println("CURRENT TOKEN <" + this.currentToken.getLabel() + ">");
-        if(this.currentToken.getLabel().equals(label)) {
+        if(this.canEatToken(label)) {
             this.currentToken = this.lexer.getNextToken();
             return;
         }
         throw new SyntaxException("Eat token failed. Unexpected token.");
     }
 
+    public boolean canEatToken(String label) {
+        return (
+                this.currentToken.getLabel().equals(label)
+                || this.currentToken.getAttribute().equals(label)
+        );
+    }
+
     public void parse() {
-        this.grammar.getFirstRule().process();
+        this.tree.setRoot(this.grammar.getFirstRule().process());
     }
 
     public void error(String label) throws SyntaxException{
@@ -43,5 +55,9 @@ public class Parser implements ParserInterface {
                 + this.getCurrentToken().getErrorInfo();
         System.out.println(errorMessage);
         throw new SyntaxException(errorMessage);
+    }
+
+    public ParserTreeInterface getTree() {
+        return this.tree;
     }
 }

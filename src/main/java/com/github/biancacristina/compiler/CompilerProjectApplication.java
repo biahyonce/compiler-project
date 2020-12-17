@@ -12,6 +12,8 @@ import com.github.biancacristina.compiler.syntax.grammar.request.FirstRequest;
 import com.github.biancacristina.compiler.syntax.grammar.request.FollowRequest;
 import com.github.biancacristina.compiler.syntax.grammar.request.RuleRequest;
 import com.github.biancacristina.compiler.syntax.impl.Parser;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeInterface;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeNodeInterface;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,5 +47,8 @@ public class CompilerProjectApplication {
         GrammarInterface grammar = GrammarBuilder.getInstance().build(rules, firstList, followList);
         ParserInterface parser = new Parser(lexer, grammar);
         parser.parse();
+        ParserTreeInterface tree = parser.getTree();
+        tree.traverse();
+        System.out.println(tree);
     }
 }

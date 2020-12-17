@@ -3,6 +3,8 @@ package com.github.biancacristina.compiler.syntax.grammar.impl;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemType;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeNodeInterface;
+import com.github.biancacristina.compiler.syntax.tree.impl.ParserTreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,17 +32,21 @@ public class Production implements ItemInterface {
     }
 
     @Override
-    public void process() {
+    public ParserTreeNodeInterface process() {
         System.out.println("PROCESSING RULE < " + this.label + " > ------------------------");
         String nextTokenLabel = this.parser.getCurrentToken().getLabel();
+
+        ParserTreeNodeInterface root = new ParserTreeNode(this.label);
+
         for (Sentence sentence: this.orRules) {
             if(!sentence.canProcess(nextTokenLabel)) {
                 continue;
             }
-            sentence.processAll();
-            return;
+            sentence.processAll(root);
+            return root;
         }
         this.parser.error(nextTokenLabel);
+        return null;
     }
 
     public void addFirst(HashMap<String, Boolean> first) {
@@ -81,5 +87,9 @@ public class Production implements ItemInterface {
         System.out.println("RULE <" + this.label + "> CHECK IF CAN PROCESS LABEL <" + label + ">");
         System.out.println("RULE <" + this.label + "> FIRST: " + this.first.toString());
         return this.isTokenInFirst(label);
+    }
+
+    public String toString() {
+        return this.label;
     }
 }

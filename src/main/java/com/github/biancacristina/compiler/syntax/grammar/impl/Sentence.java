@@ -3,6 +3,7 @@ package com.github.biancacristina.compiler.syntax.grammar.impl;
 import com.github.biancacristina.compiler.syntax.ParserInterface;
 import com.github.biancacristina.compiler.syntax.grammar.ItemInterface;
 import com.github.biancacristina.compiler.syntax.grammar.exception.SyntaxException;
+import com.github.biancacristina.compiler.syntax.tree.ParserTreeNodeInterface;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class Sentence {
         this.concatenation.add(item);
     }
 
-    public void processAll() {
+    public void processAll(ParserTreeNodeInterface root) {
         System.out.printf("\nPROCESS SENTENCE: ");
         this.concatenation.forEach(item -> System.out.printf(" <" + item.getLabel() + ">,"));
         System.out.printf(" end-sentence\n\n");
@@ -27,7 +28,7 @@ public class Sentence {
             if(!item.canProcess(currentTokenLabel)) {
                 this.parser.error(currentTokenLabel);
             }
-            item.process();
+            root.addChild(item.process());
         }
     }
 
