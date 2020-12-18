@@ -1,2 +1,30 @@
-S id separator eof
-S1 id separator eof
+Estruturaprincipal id
+Number int float
+Value str id int float (
+Type id
+Elements str id int float
+E' ] ;
+Array [
+Assign id
+Declaration id
+Comment comment
+Fator int float id (
+Expr int float id (
+X' signal ) relop , ] ;
+Se id
+Entao id
+Senao id
+Boolexp int float id (
+B' relop )
+Ifsozinho id
+If id
+While id
+Dowhile id
+Rep id
+Comando id comment
+Comandosdebloco id comment
+Co' id comment }
+ArgumentoFactor id
+Argumento id
+A' , )
+Bloco {

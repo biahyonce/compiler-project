@@ -25,7 +25,12 @@ public class Sentence {
         System.out.printf(" end-sentence\n\n");
         for(ItemInterface item: this.concatenation) {
             String currentTokenLabel = this.parser.getCurrentToken().getLabel();
-            if(!item.canProcess(currentTokenLabel)) {
+            String currentTokenAttribute = this.parser.getCurrentToken().getAttribute();
+            if(!(
+                    item.canProcess(currentTokenLabel)
+                    || item.canProcess(currentTokenAttribute)
+                )
+            ) {
                 this.parser.error(currentTokenLabel);
             }
             root.addChild(item.process());

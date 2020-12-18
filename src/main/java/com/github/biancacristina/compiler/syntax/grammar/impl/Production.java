@@ -35,11 +35,15 @@ public class Production implements ItemInterface {
     public ParserTreeNodeInterface process() {
         System.out.println("PROCESSING RULE < " + this.label + " > ------------------------");
         String nextTokenLabel = this.parser.getCurrentToken().getLabel();
-
+        String nextTokenAttribute = this.parser.getCurrentToken().getAttribute();
         ParserTreeNodeInterface root = new ParserTreeNode(this.label);
 
         for (Sentence sentence: this.orRules) {
-            if(!sentence.canProcess(nextTokenLabel)) {
+            if(!(
+                    sentence.canProcess(nextTokenLabel)
+                    || sentence.canProcess(nextTokenAttribute)
+                )
+            ) {
                 continue;
             }
             sentence.processAll(root);

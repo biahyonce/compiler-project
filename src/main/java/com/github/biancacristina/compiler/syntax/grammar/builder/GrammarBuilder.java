@@ -23,6 +23,7 @@ public class GrammarBuilder {
         rules.forEach( rule -> buildRule(grammar, rule.getProduction(), rule.getSentences()) );
         firstList.forEach( first -> {
             Production production = (Production) grammar.get(first.getProduction());
+            System.out.println("production: " + first.getProduction());
             System.out.println(production.getLabel());
             production.addFirst(first.getFirst());
         } );

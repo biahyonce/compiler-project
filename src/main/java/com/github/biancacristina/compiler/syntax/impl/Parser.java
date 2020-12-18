@@ -29,9 +29,10 @@ public class Parser implements ParserInterface {
 
     public void eatToken(String label) {
         System.out.println("EAT TOKEN <" + label + ">");
-        System.out.println("CURRENT TOKEN <" + this.currentToken.getLabel() + ">");
+        System.out.println("CURRENT TOKEN <" + this.currentToken.getLabel() + ", " + this.currentToken.getAttribute() + ">");
         if(this.canEatToken(label)) {
             this.currentToken = this.lexer.getNextToken();
+            System.out.println("CURRENT TOKEN AFTER EAT <" + this.currentToken.getLabel() + ", " + this.currentToken.getAttribute() + ">");
             return;
         }
         throw new SyntaxException("Eat token failed. Unexpected token.");
