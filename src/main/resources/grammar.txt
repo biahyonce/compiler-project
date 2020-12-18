@@ -1,0 +1,49 @@
+Estruturaprincipal Type id ( Argumento ) Bloco eof
+Number int
+Number float
+Value str
+Value id
+Value int
+Value float
+Value Expr
+Type id
+Elements Value E'
+E' , Value E'
+E'
+Array [ Elements ]
+Assign id := Elements ;
+Declaration Type Assign
+Comment comment
+Expr Fator X'
+X' signal Fator X'
+X'
+Fator Number
+Fator id
+Fator ( Expr )
+Se se
+Entao entao
+Senao senao
+Boolexp Expr B'
+B' relop Expr B'
+B'
+Ifsozinho Se ( Boolexp ) Entao Bloco
+If Ifsozinho Senao If
+If Ifsozinho Senao Bloco
+While enquanto ( Boolexp ) Bloco
+Dowhile faca Bloco Enquanto ( Boolexp )
+Rep While
+Rep Dowhile
+Comando Declaration
+Comando Assign
+Comando Comment
+Comando If
+Comando While
+Comando Dowhile
+Comandosdebloco Comando Co'
+Co' Comandosdebloco
+Co'
+Argumento ArgumentoFactor A'
+A' , ArgumentoFactor A'
+A'
+ArgumentoFactor Type id
+Bloco { Comandosdebloco }
